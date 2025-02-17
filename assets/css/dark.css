@@ -1,0 +1,11 @@
+body {
+    background-color: black;
+    color: white;
+}
+.fa-sun {
+    display: none;
+}
+/* button{
+    background-color: transparent;
+    border: none;
+} */
