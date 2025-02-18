@@ -276,13 +276,16 @@
                     </div>
                     <div class="name">
                         <input type="text" id="fname" name="fullname" placeholder="Your Name">
+                        <p id="nameError"></p>
                     </div>
                     <div class="email">
-                        <input type="email" id="em" name="email" placeholder="Email Address">
+                        <input type="email" id="email" name="email" placeholder="Email Address">
+                        <p id="emailError"></p>
                     </div>
                     <div class="message">
-                        <textarea name="msg" name="message" id="msg" cols="100%" rows="10"
+                        <textarea name="message" name="message" id="message" cols="100%" rows="10"
                             placeholder="Your Message"></textarea>
+                            <p id="msgError"></p>
                     </div>
                     <button type="submit" class="send"><i></i>Send</button>
                     <p id="message"></p>
@@ -299,11 +302,56 @@
         })();
     </script>
     <script type="text/javascript">
-        const message = document.getElementById("message");
         window.onload = function () {
             document.getElementById('contact-form').addEventListener('submit', function (event) {
                 event.preventDefault();
-                // these IDs from the previous steps
+    
+                const fname = document.getElementById("fname").value.trim();
+                const email = document.getElementById("email").value.trim();
+                const message = document.getElementById("message").value.trim();
+                const nameError = document.getElementById("nameError");
+                const emailError = document.getElementById("emailError");
+                const msgError = document.getElementById("msgError");
+                
+                nameError.textContent = "";
+                emailError.textContent = "";
+                msgError.textContent = "";
+    
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    
+                let hasError = false;
+    
+                if (fname === "") {
+                    nameError.textContent = "Please enter your name.";
+                    nameError.style.color = "red";
+                    hasError = true;
+                }
+    
+                if (email === "") {
+                    emailError.textContent = "Please enter your email.";
+                    emailError.style.color = "red";
+                    hasError = true;
+                } else if (!emailRegex.test(email)) {
+                    emailError.textContent = "Please enter a valid email address.";
+                    emailError.style.color = "red";
+                    hasError = true;
+                }
+                if (message === "") {
+                    msgError.textContent = "Please enter a valid message.";
+                    msgError.style.color = "red";
+                    hasError = true;
+                }
+                
+    
+                if (hasError) {
+                    setTimeout(() => {
+                        nameError.textContent = "";
+                        emailError.textContent = "";
+                        msgError.textContent = "";
+                    }, 3000);
+                    return;
+                }
+    
                 emailjs.sendForm('service_uxrna5l', 'template_ja0z09', this)
                     .then(() => {
                         message.textContent = "Message sent successfully!";
@@ -312,14 +360,14 @@
                     }, (error) => {
                         message.textContent = "Message not sent!";
                         message.style.color = "red";
-                    }
-
-                    ); setTimeout(() => { message.textContent = "" }, 5000);
-
+                    });
+    
+                setTimeout(() => { message.textContent = "" }, 5000);
             });
         }
     </script>
-
+    
+    
 
     <!-- footer section -->
 
