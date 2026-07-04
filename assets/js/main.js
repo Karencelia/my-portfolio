@@ -1,3 +1,13 @@
+/* ===== LOADER ===== */
+const loader = document.getElementById('loader');
+
+window.addEventListener('load', () => {
+    // Wait for the bar animation to finish (1.8s) then fade out
+    setTimeout(() => {
+        loader.classList.add('hide');
+    }, 1800);
+});
+
 /* ===== NAVBAR: scroll shrink + active link highlight ===== */
 const navbar = document.getElementById('navbar');
 const navLinks = document.querySelectorAll('.nav-link');

@@ -1,3 +1,55 @@
+/* ===== LOADER ===== */
+.loader {
+    position: fixed;
+    inset: 0;
+    background: var(--bg-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+.loader.hide {
+    opacity: 0;
+    visibility: hidden;
+}
+.loader-content {
+    text-align: center;
+}
+.loader-logo {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    margin-bottom: 24px;
+    letter-spacing: -0.5px;
+    animation: pulse 1.2s ease-in-out infinite;
+}
+.loader-logo span { color: var(--accent-light); }
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0.4; }
+}
+.loader-bar {
+    width: 180px;
+    height: 3px;
+    background: var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 0 auto;
+}
+.loader-fill {
+    height: 100%;
+    width: 0%;
+    background: var(--gradient);
+    border-radius: 10px;
+    animation: loadbar 1.8s ease forwards;
+}
+@keyframes loadbar {
+    0%   { width: 0%; }
+    60%  { width: 75%; }
+    100% { width: 100%; }
+}
+
 /* ===== CSS VARIABLES ===== */
 :root {
     --bg-primary: #0a0a0f;
